@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>Visualize Sorting</title>
+        <meta charset="UTF-8">
+    </head>
+    <script
+			  src="jquery.js">
+    </script>
+    <style>
+        .canvas{   
+
+            width: 600px;
+            height: 100%;
+        }
+        .canvas-line
+        {    
+            display: block;
+            margin:1px;
+            text-align: left;
+            color:red; 
+        }
+    </style>
+    <body>
+  <!--  	<div class="menu">
+    		<select>
+    			<option>Bubble Sort</option>
+    			<option>Selection Sort</option>
+    			<option>Merge Sort</option>
+    			<option>Quick Sort</option>
+    		</select>
+    	</div>-->
+        <div class="canvas" id="canvas">
+            
+        </div>
+    </body>
+    <script>
+
+
+    var arr = [];
+    for(i=0;i<700;i++)
+    {
+    arr[i] = Math.floor(Math.random(0,100)*500);
+    }
+
+        draw();
+        sort();
+
+        function sort(){
+        
+        for(i=0;i<700;i++)
+        {
+            for(j=0;j<700-i-1;j++)
+            {
+                if(arr[j+1]<arr[j])
+                {   
+                	temp = arr[j+1];
+             		arr[j+1]=arr[j];
+             		arr[j]=temp; 
+					swap(j+1,j);
+                }
+            }    
+        }
+        
+        }
+        function draw(){
+            for(i=0;i<700;i++)
+            {
+            var str = "<hr class='canvas-line' style='width:"+arr[i]+"px' id='id-"+i+"'>";
+            $("#canvas").append(str);
+            }
+        }
+
+        function swap(i,j){
+                
+                var w1,iele,jele;
+                setTimeout(function(){
+                iele = document.getElementById("id-"+i);
+                jele = document.getElementById("id-"+j);
+                w1 = iele.style.width;
+                iele.style.width = jele.style.width;
+                jele.style.width = w1;
+                },500);
+
+                
+        }
+    </script>
+</html>
