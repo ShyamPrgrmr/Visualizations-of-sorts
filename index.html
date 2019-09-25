@@ -1,0 +1,248 @@
+<html>
+    <head>
+        <title>Visualize Sorting</title>
+        <meta charset="UTF-8">
+    </head>
+    <script
+			  src="jquery.js">
+    </script>
+    <style>
+        .canvas{   
+
+            width: 600px;
+            height: 100%;
+        }
+        .canvas-line
+        {    
+            margin:0px;
+            color: grey;
+            text-align: left; 
+        }
+        .menu{
+        	margin-right:0px; 
+        	text-align: center;
+        	background: yellow;
+        }
+
+        .select-sort{
+        	width : 160px;
+        	color: white;
+        	background-color: black;
+        	text-decoration: none;
+
+        }
+
+    </style>
+    <body>
+       <div class="menu">
+    		<select  id="change_sort" class="select-sort">
+    			<option value="0">Select Sort</option>
+    			<option value="1">Bubble Sort</option>
+    			<option value="2">Selection Sort</option>
+    			<option value="3">Insertion Sort</option>
+    			<option value="4">Merge Sort</option>
+    			<option value="5">Quick Sort</option>
+    		</select>
+    		<button onclick="change()">Sort</button>
+    		<button onclick="reset()">Reset</button>
+    	</div>
+
+
+        <div class="canvas" id="canvas">
+            
+        </div>
+    </body>
+    <script>
+
+
+    var arr = [];
+    var m = 0;
+
+    for(i=0;i<1000;i++)
+    {
+    arr[i] = Math.floor(Math.random(0,100)*500);
+    }
+
+    function reset()
+    {
+    	window.open("index.html");	
+    }
+    draw();
+    function change()
+    {
+   	 	var change = document.getElementById('change_sort').value;
+    	if(change == 1)
+    	{
+    		if(m%2==0)
+    		{
+    			++m;
+	    		bubble_sort();
+    		}
+    		else
+    		{
+    			++m;
+    			bubble_sort_reverse();
+    		}
+    	}
+
+    	if(change==2)
+    	{
+    		if(m%2==0)
+    		{
+    			++m;
+    			selection_sort();
+    		}
+    		else
+    		{
+    			++m;
+    			selection_sort_reverse();
+    		}
+    	}
+
+    	if(change==3)
+    	{
+    		if(m%2==0)
+    		{
+    			++m;
+    			insertion_sort();
+    		}
+    		else
+    		{
+    			++m;
+    			insertion_sort_reverse();
+    		}
+    	}
+    }
+
+    function draw(){
+            for(i=0;i<1000;i++)
+            {
+            var str = "<hr class='canvas-line' style='width:"+arr[i]+"px' id='id-"+i+"'>";
+            $("#canvas").append(str);
+            }
+    }
+
+      function bubble_sort(){  
+        for(i=0;i<1000;i++)
+        {
+            for(j=0;j<1000-i-1;j++)
+            {
+                if(arr[j+1]<arr[j])
+                {   
+                	temp = arr[j+1];
+             		arr[j+1]=arr[j];
+             		arr[j]=temp; 
+					swap(j+1,j);
+                }
+            }    
+        }
+        
+        }
+
+        function selection_sort(){  
+        for(i=0;i<1000;i++)
+        {
+            for(j=i+1;j<1000;j++)
+            {
+                if(arr[i]>arr[j])
+                {   
+                	temp = arr[i];
+             		arr[i]=arr[j];
+             		arr[j]=temp; 
+					swap(i,j);
+                }
+            }    
+        }
+        
+        }
+        
+
+        function selection_sort_reverse(){  
+        for(i=0;i<1000;i++)
+        {
+            for(j=i+1;j<1000;j++)
+            {
+                if(arr[i]<arr[j])
+                {   
+                	temp = arr[i];
+             		arr[i]=arr[j];
+             		arr[j]=temp; 
+					swap(i,j);
+                }
+            }    
+        }
+        
+        }
+        
+
+      function bubble_sort_reverse(){  
+        for(i=0;i<1000;i++)
+        {
+            for(j=0;j<1000-i-1;j++)
+            {
+                if(arr[j+1]>arr[j])
+                {   
+                	temp = arr[j+1];
+             		arr[j+1]=arr[j];
+             		arr[j]=temp; 
+					swap(j+1,j);
+                }
+            }    
+        }
+        
+        }
+
+
+
+        function insertion_sort()
+        {
+        	var d,c;
+			for(c=1;c<=1000-1;c++)
+			{
+				d=c;
+				var im = document.getElementById('id-'+c);
+				im.style.color='red';
+				while(d>0 && arr[d-1] > arr[d]){
+					temp = arr[d];
+					arr[d]=arr[d-1];
+					arr[d-1]=temp;
+					swap(d,d-1);
+					d--;
+				}
+				im.style.color='grey';
+			}        	
+        }
+
+         function insertion_sort_reverse()
+        {
+        	var d,c;
+			for(c=1;c<=1000-1;c++)
+			{
+				d=c;
+				while(d>0 && arr[d-1] < arr[d]){
+					temp = arr[d];
+					arr[d]=arr[d-1];
+					arr[d-1]=temp;
+					swap(d,d-1);
+					d--;
+				}
+			}        	
+        }
+
+
+
+        function swap(i,j){
+                
+                var w1,iele,jele;
+                setTimeout(function(){
+                iele = document.getElementById("id-"+i);
+                jele = document.getElementById("id-"+j);
+                w1 = iele.style.width;
+                iele.style.width = jele.style.width;
+                jele.style.width = w1;
+                },100);
+
+                
+        }
+    </script>
+</html>
